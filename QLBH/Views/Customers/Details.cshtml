@@ -1,0 +1,86 @@
+﻿@model QLBH.Models.Customer
+
+@{
+    ViewBag.Title = "Quản lý khách hàng";
+    ViewBag.CardHeader = "Chi tiết khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.CardHeader</h3>
+                </div>
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cus_id)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cus_id)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cus_name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cus_name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cus_fullname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cus_fullname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cus_email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cus_email)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cus_phone)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cus_phone)
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="box-footer">
+                    <a href="@Url.Action("Edit", "Customers", new { id = Model.Cus_id })" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <a href="@Url.Action("Index", "Customers")" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Quay lại trang trước</a>
+            </p>
+        </div>
+    </div>
+</section>

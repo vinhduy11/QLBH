@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shopModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="bill">
+    <Key>
+      <PropertyRef Name="bill_id" />
+    </Key>
+    <Property Name="bill_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="total" Type="double" />
+    <Property Name="payment" Type="varchar" MaxLength="255" />
+    <Property Name="address" Type="longtext" />
+    <Property Name="date" Type="timestamp" Precision="0" />
+    <Property Name="tinhtrang" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bill_detail">
+    <Key>
+      <PropertyRef Name="bill_detail_id" />
+    </Key>
+    <Property Name="bill_detail_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bill_id" Type="bigint" />
+    <Property Name="product_id" Type="bigint" />
+    <Property Name="price" Type="double" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="category_name" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="cus_id" />
+    </Key>
+    <Property Name="cus_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cus_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cus_password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cus_fullname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cus_email" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_id" Type="bigint" />
+    <Property Name="product_name" Type="longtext" />
+    <Property Name="product_image" Type="varchar" MaxLength="50" />
+    <Property Name="product_price" Type="double" />
+    <Property Name="product_description" Type="longtext" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fullname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="shopModelStoreContainer">
+    <EntitySet Name="bill" EntityType="Self.bill" Schema="shop" store:Type="Tables" />
+    <EntitySet Name="bill_detail" EntityType="Self.bill_detail" Schema="shop" store:Type="Tables" />
+    <EntitySet Name="category" EntityType="Self.category" Schema="shop" store:Type="Tables" />
+    <EntitySet Name="customers" EntityType="Self.customers" Schema="shop" store:Type="Tables" />
+    <EntitySet Name="product" EntityType="Self.product" Schema="shop" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="shop" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

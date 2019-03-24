@@ -1,0 +1,70 @@
+﻿@model QLBH.Models.User
+
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    ViewBag.CardHeader = "Sửa thông tin người dùng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.CardHeader</h3>
+                </div>
+                <!-- /.box-header -->
+                @using (Html.BeginForm("saveEditData", "Users", new { @role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                <div class="box-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.User_id)
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Họ tên</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control", @name = "email", @type = "text" } })
+                            @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Email</label>
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @name = "email", @type = "email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                    </div>
+                }
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <a href="@Url.Action("Index", "Users")" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Quay lại trang trước</a>
+            </p>
+        </div>
+    </div>
+</section>

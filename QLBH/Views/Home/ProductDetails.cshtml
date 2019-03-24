@@ -1,0 +1,40 @@
+﻿@model QLBH.Models.Product
+
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h1 class="my-4">
+    @Html.DisplayFor(modelItem => modelItem.Product_name)
+</h1>
+
+<!-- Portfolio Item Row -->
+<div class="row">
+
+    <div class="col-md-8">
+        <img class="img-fluid" src="@Html.DisplayFor(modelItem => modelItem.Product_image)" alt="">
+    </div>
+
+    <div class="col-md-4">
+        <h4 class="my-3">@Html.DisplayNameFor(modelItem => modelItem.Product_name)</h4>
+        <p>@Html.DisplayFor(modelItem => modelItem.Product_name)</p>
+        <h4 class="my-3">@Html.DisplayNameFor(modelItem => modelItem.Product_price)</h4>
+        <p>@Html.DisplayFor(modelItem => modelItem.Product_price)</p>
+        <h4 class="my-3">@Html.DisplayNameFor(modelItem => modelItem.Provider_name)</h4>
+        <p>@Html.DisplayFor(modelItem => modelItem.Provider_name)</p>
+        <h4 class="my-3">@Html.DisplayNameFor(modelItem => modelItem.Category_name)</h4>
+        <p>@Html.DisplayFor(modelItem => modelItem.Category_name)</p>
+        <a href="" class="btn btn-success">Đặt hàng</a>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <h3 class="my-3">Mô tả</h3>
+        <p>@Html.DisplayFor(modelItem => modelItem.Product_description)</p>
+        <a href="@Url.Action("", "Home")" class="btn btn-primary">Quay lại trang chủ</a>
+    </div>
+    
+</div>
+<!-- /.row -->

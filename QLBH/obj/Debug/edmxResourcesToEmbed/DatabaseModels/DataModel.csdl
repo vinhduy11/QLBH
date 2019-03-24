@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="category_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="products" Relationship="shopModel.cate_pk" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="shopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="providers" EntityType="shopModel.provider" />
+    <EntitySet Name="products" EntityType="shopModel.product" />
+    <AssociationSet Name="cate_pk" Association="shopModel.cate_pk">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="provider_pk" Association="shopModel.provider_pk">
+      <End Role="provider" EntitySet="providers" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <EntitySet Name="customers" EntityType="shopModel.customer" />
+    <EntitySet Name="order_details" EntityType="shopModel.order_details" />
+    <AssociationSet Name="product_pk" Association="shopModel.product_pk">
+      <End Role="product" EntitySet="products" />
+      <End Role="order_details" EntitySet="order_details" />
+    </AssociationSet>
+    <EntitySet Name="orders" EntityType="shopModel.order" />
+    <AssociationSet Name="customer_pk" Association="shopModel.customer_pk">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="bill_pk" Association="shopModel.bill_pk">
+      <End Role="order" EntitySet="orders" />
+      <End Role="order_details" EntitySet="order_details" />
+    </AssociationSet>
+    <FunctionImport Name="GetAllOrders" EntitySet="orders" ReturnType="Collection(shopModel.order)" />
+  </EntityContainer>
+  <EntityType Name="provider">
+    <Key>
+      <PropertyRef Name="provider_id" />
+    </Key>
+    <Property Name="provider_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="provider_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="provider_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="provider_address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="provider_phone" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="products" Relationship="shopModel.provider_pk" FromRole="provider" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="provider_id" Type="Int32" Nullable="false" />
+    <Property Name="product_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="product_image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="product_price" Type="Int32" Nullable="false" />
+    <Property Name="quantities" Type="Int32" Nullable="false" />
+    <Property Name="product_description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="category" Relationship="shopModel.cate_pk" FromRole="product" ToRole="category" />
+    <NavigationProperty Name="provider" Relationship="shopModel.provider_pk" FromRole="product" ToRole="provider" />
+    <NavigationProperty Name="order_details" Relationship="shopModel.product_pk" FromRole="product" ToRole="order_details" />
+  </EntityType>
+  <Association Name="cate_pk">
+    <End Type="shopModel.category" Role="category" Multiplicity="1" />
+    <End Type="shopModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="provider_pk">
+    <End Type="shopModel.provider" Role="provider" Multiplicity="1" />
+    <End Type="shopModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="provider">
+        <PropertyRef Name="provider_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="provider_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="cus_id" />
+    </Key>
+    <Property Name="cus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cus_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cus_password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cus_fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cus_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cus_phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orders" Relationship="shopModel.customer_pk" FromRole="customer" ToRole="order" />
+  </EntityType>
+  <EntityType Name="order_details">
+    <Key>
+      <PropertyRef Name="order_detail_id" />
+    </Key>
+    <Property Name="order_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_id" Type="Int32" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="product" Relationship="shopModel.product_pk" FromRole="order_details" ToRole="product" />
+    <NavigationProperty Name="order" Relationship="shopModel.bill_pk" FromRole="order_details" ToRole="order" />
+  </EntityType>
+  <Association Name="product_pk">
+    <End Type="shopModel.product" Role="product" Multiplicity="0..1" />
+    <End Type="shopModel.order_details" Role="order_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="order_details">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="payment" Type="Int32" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="customer" Relationship="shopModel.customer_pk" FromRole="order" ToRole="customer" />
+    <NavigationProperty Name="order_details" Relationship="shopModel.bill_pk" FromRole="order" ToRole="order_details" />
+  </EntityType>
+  <Association Name="customer_pk">
+    <End Type="shopModel.customer" Role="customer" Multiplicity="0..1" />
+    <End Type="shopModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="cus_id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bill_pk">
+    <End Type="shopModel.order" Role="order" Multiplicity="0..1" />
+    <End Type="shopModel.order_details" Role="order_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="order_details">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetAllOrders_Result" />
+</Schema>

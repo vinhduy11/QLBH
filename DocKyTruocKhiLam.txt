@@ -1,0 +1,2 @@
+﻿Vui lòng đọc cách sử dụng git tại link này quan trọng nhất là git commit, pull và push
+https://backlog.com/git-tutorial/vn/intro/intro1_1.html

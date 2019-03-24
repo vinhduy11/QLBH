@@ -1,0 +1,93 @@
+﻿@model QLBH.Models.Product
+@{
+    ViewBag.Title = "Quản lý sản phâm";
+    ViewBag.CardHeader = "Tạo sản phâm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.CardHeader: <strong>@Html.DisplayFor(model => model.Product_name)</strong></h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-md-5">
+                        <a href="#">
+                            <img class="img-fluid rounded mb-3 mb-md-0" src="@Html.DisplayFor(model => model.Product_image)" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-5">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Product_price)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Product_price)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Quantities)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Quantities)
+                            </dd>
+
+
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Provider_name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Provider_name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Category_name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Category_name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Product_description)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Product_description)
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <a href="@Url.Action("Edit", "Products", new { id = Model.Category_id })" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <a href="@Url.Action("Index", "Products")" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Quay lại trang trước</a>
+            </p>
+        </div>
+    </div>
+</section>

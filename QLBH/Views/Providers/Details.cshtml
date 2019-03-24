@@ -1,0 +1,82 @@
+﻿@model QLBH.Models.Provider
+
+@{
+    ViewBag.Title = "Quản lý nhà cung cấp";
+    ViewBag.CardHeader = "Thông tin nhà cung cấp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.CardHeader</h3>
+                </div>
+                <div class="box-body">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Provider_id)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Provider_id)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Provider_name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Provider_name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Provider_email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Provider_email)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Provider_address)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Provider_address)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Provider_phone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Provider_phone)
+                    </dd>
+                </div>
+                <div class="box-footer">
+                    <a href="@Url.Action("Edit", "Providers", new { id = Model.Provider_id })" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <a href="@Url.Action("Index", "Providers")" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Quay lại trang trước</a>
+            </p>
+        </div>
+    </div>
+</section>

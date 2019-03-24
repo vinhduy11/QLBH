@@ -1,0 +1,96 @@
+﻿@model IEnumerable<QLBH.Models.Customer>
+
+@{
+    ViewBag.Title = "Quản lý khách hàng";
+    ViewBag.CardHeader = "Danh sách khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <p>
+        <a href="@Url.Action("Create", "Customers")" class="btn btn-primary"><i class="fa fa-plus"></i>  Tạo mới</a>
+    </p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.CardHeader</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    @if (@ViewBag.Noti != null && @ViewBag.Noti.Show == true)
+                    {
+                        <div class="alert alert-@ViewBag.Noti.Type alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><i class="icon fa fa-ban"></i> Notice!</h4>
+                            @ViewBag.Noti.Message
+                        </div>
+                    }
+                        <table class="table table-striped">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cus_id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cus_name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cus_fullname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cus_email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cus_phone)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cus_id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cus_name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cus_fullname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cus_email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cus_phone)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Sửa", "Edit", new { id=item.Cus_id }) |
+                                        @Html.ActionLink("Chi tiết", "Details", new { id=item.Cus_id }) |
+                                        @Html.ActionLink("Xóa", "Delete", new { id=item.Cus_id })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
