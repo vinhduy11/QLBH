@@ -11,6 +11,7 @@ using System.Web.Security;
 
 namespace QLBH.Controllers
 {
+    [Filters.Authorized]
     public class UsersController : Controller
     {
         // GET: Users
@@ -20,7 +21,7 @@ namespace QLBH.Controllers
         private string type;
         private string message;
 
-        [Authorize]
+        
         public ActionResult Index()
         {
             //var users = db.users.SqlQuery("SELECT * FROM USERS").ToList();
@@ -37,76 +38,9 @@ namespace QLBH.Controllers
 
 
 
-        //Session
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult doLogin()
-        {
-            User user = new User();
-            user.Username = Request["Username"];
-            user.Password = Request["Password"];
-
-            try
-            {
-                bool checkUserExisted = new User().checkUserExisted(user.Username);
-                if (checkUserExisted == false)
-                {
-                    this.show = true;
-                    this.type = "danger";
-                    this.message = "Tài khoản không tồn tại. Vui lòng kiểm tra!";
-                    ModelState.AddModelError("", this.message);
-                }
-
-                if (ModelState.IsValid)
-                {
-                    bool doLogin = new User().doLogin(user.Username, user.Password);
-
-                    if (doLogin == true)
-                    {
-                        this.show = true;
-                        this.type = "success";
-                        this.message = "Đăng nhập thành công!";
-                        var info = new User().getFullUserInfo(user.Username);
-                        ViewBag.UserInfos = new
-                        {
-                            Fullname = info.Fullname,
-                            Email = info.Email
-                        };
-
-                        FormsAuthentication.SetAuthCookie(user.Username, true);
-                    }
-                    return RedirectToAction("Index", "Home");
-                }
-
-            }
-            catch (MySqlException)
-            {
-                this.show = true;
-                this.type = "danger";
-                this.message = "Đăng nhập không thành công do lỗi CSDL!";
-                ModelState.AddModelError("", this.message);
-            }
-            catch (RetryLimitExceededException)
-            {
-                this.show = true;
-                this.type = "danger";
-                this.message = "Đăng nhập không thành công!";
-                ModelState.AddModelError("", this.message);
-            }
-
-            return RedirectToAction("Login", "Home");
-        }
-
-        [Authorize]
-        public ActionResult doLogout()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
-        }
+        
 
         //Admin
-        [Authorize]
         public ActionResult Details(int? id)
         {
             User user = new User();
@@ -126,7 +60,6 @@ namespace QLBH.Controllers
             return View(userData);
         }
 
-        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -212,7 +145,7 @@ namespace QLBH.Controllers
             return View("Index", users);
         }
 
-        [Authorize]
+        
         public ActionResult Edit(int? id)
         {
             User user = new User();
@@ -232,7 +165,7 @@ namespace QLBH.Controllers
             return View(userData);
         }
 
-        [Authorize]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult saveEditData()
@@ -294,7 +227,7 @@ namespace QLBH.Controllers
             return View("Index", users);
         }
 
-        [Authorize]
+        
         public ActionResult Delete(int? id)
         {
             User user = new User();

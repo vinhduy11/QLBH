@@ -6,10 +6,12 @@ using System.Web.Mvc;
 
 namespace QLBH.Controllers
 {
-    [Authorize]
+
+    [Filters.Authorized]
     public class AdminController : Controller
     {
         // GET: Admin
+        
         public ActionResult Index()
         {
             return View();

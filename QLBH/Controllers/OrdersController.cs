@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace QLBH.Controllers
 {
-    [Authorize]
+    [Filters.Authorized]
     public class OrdersController : Controller
     {
         // GET: Bills

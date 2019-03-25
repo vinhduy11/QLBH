@@ -25,6 +25,8 @@ namespace QLBH.Controllers
                 products.Add(new Product(sqlData[i].Product_id, sqlData[i].Category_id, sqlData[i].Provider_id, sqlData[i].Product_name, sqlData[i].Product_image, sqlData[i].Product_price, sqlData[i].Quantities, sqlData[i].Product_description, sqlData[i].Category_name, sqlData[i].Provider_name));
             }
 
+            ViewBag.Test = "test";
+
             return View(products);
         }
 
@@ -62,6 +64,7 @@ namespace QLBH.Controllers
 
         public ActionResult Login()
         {
+            ViewBag.Noti = TempData["Noti"];
             return View();
         }
     }

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace QLBH.Controllers
 {
-    [Authorize]
+    [Filters.Authorized]
     public class ProductsController : Controller
     {
         // GET: Products

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace QLBH.Models
 {
-    [Authorize]
+    
     public class Provider
     {
         private int? provider_id;
