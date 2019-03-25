@@ -12,3 +12,5 @@ https://backlog.com/git-tutorial/vn/intro/intro1_1.html
 Chú ý để cho project chạy thì phải đảm bảo connect được mysql server từ Visual Studio trước
 
 <b>Create database shop và import data trong file sql nằm trong thư mục data</b>
+
+<b>Pass đăng nhập: admin/admin</b>
